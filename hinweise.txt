@@ -1,0 +1,42 @@
+﻿- Internet Kartenkombinationen recherchieren
+
+
+
+- für alle Kombinationen ist eine Methode notwendig
+
+
+
+- Die Anzahl der Karten(=52) und Farben(=4) über Konstanten anlegen
+
+
+
+- eine Methoder welcher ein Array mit 52 Stellen anlegt
+ und mit den Zahlen 0 bis 51 initialisiert/befüllt.
+
+Parameter ist die Länge in dem Fall 52
+
+
+
+- eine Methoder welcher ein Array mit 5 Stellen returniert,
+
+Die 5 Karten/Zahlen werden aus dem Member-Array (im vorherigem Punkt angelegt)
+gezogen. 
+Parameter der Methode ist die Anzahl der zu ziehenden Zahlen.
+
+Die Ziehmethode ist die im Unterricht besprochene 
+(gezogene Zahl mit der letzten 
+Stelle im Array tauschen und die Zufallsrange um 1 verkleinern)
+
+
+
+- eine Hilfs-Methode um die Farbe zu berechnen
+Parameter int Zahl zB 41 
+Rückgabewert: 
+Farbe (0 bis 3, 0=Herz, 1=Kreuz, 2=Pik, 3=Karo )
+
+
+
+- eine Hilfs-Methode um die Kartensymbolik zu berechnen
+Parameter int Zahl zB 41 
+Rückgabewert: 
+Symbol (0 bis 12, 0=Zweier, 1=Dreier, .....11=König, 12=Ass )
