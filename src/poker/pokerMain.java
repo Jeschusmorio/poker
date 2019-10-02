@@ -13,68 +13,23 @@ public class pokerMain {
 		for (int i = 0; i < ANZAHL_DURCHLAEUFE; i++) {
 			kartendeck(52);
 			ziehung(5);
-			String ausgabe="High Card";
-			if (checkPair(1)) {
-				ausgabe="One Pair";
-			}
-			if (twoPair()) {
-				ausgabe="Two Pair";
-			}
-			if (checkPair(2)) {
-				ausgabe="Three of a Kind";
-			}
-			if (straight()) {
-				ausgabe="Straight";
-			}
-			if (flush()) {
-				ausgabe="Flush";
-			}
-			if (checkPair(2) && checkPair(1)) {
-				ausgabe="Full House";
-			}
-			if (checkPair(3)) {
-				ausgabe="Four of a Kind";
-			}
-			if (straight() && flush()) {
-				ausgabe="Straight Flush";
-			}
-			if (royalFlush()) {
-				ausgabe="Royal Flush";
-			}
+			//String ausgabe="High Card";
+			if (checkPair(1)) {wslZaehler[1]++;} 					//One Pair
+			if (twoPair()) {wslZaehler[2]++;} 						//Two Pair;
+			if (checkPair(2)) {wslZaehler[3]++;}					//Three of a Kind
+			if (straight()) {wslZaehler[4]++;}						//Straight
+			if (flush()) {wslZaehler[5]++;}							//Flush
+			if (checkPair(2) && checkPair(1)) {wslZaehler[6]++;} 	//Full House
+			if (checkPair(3)) {wslZaehler[7]++;} 					//Four of a Kind
+			if (straight() && flush()) {wslZaehler[8]++;}			//Straight Flush
+			if (royalFlush()) {wslZaehler[9]++;} 					//Royal Flush
 			//System.out.println(ausgabe);
-			switch (ausgabe) {
-			case "High Card":
-				wslZaehler[0]++;
-				break;
-			case "One Pair":
-				wslZaehler[1]++;
-				break;
-			case "Two Pair":
-				wslZaehler[2]++;
-				break;
-			case "Three of a Kind":
-				wslZaehler[3]++;
-				break;
-			case "Straight":
-				wslZaehler[4]++;
-				break;
-			case "Flush":
-				wslZaehler[5]++;
-				break;
-			case "Full House":
-				wslZaehler[6]++;
-				break;
-			case "Four of a Kind":
-				wslZaehler[7]++;
-				break;
-			case "Straight Flush":
-				wslZaehler[8]++;
-				break;
-			case "Royal Flush":
-				wslZaehler[9]++;
-				break;
-			}
 		}
+		float sumZaehler=0;
+		for (int i = 1; i < ANZAHL_KOMBINATIONEN; i++) {
+			sumZaehler= sumZaehler + wslZaehler[i];
+		}
+		wslZaehler[0] = ANZAHL_DURCHLAEUFE - sumZaehler;			//High Card
 		wslAusgabe("High Card", wslZaehler[0]);
 		wslAusgabe("One Pair", wslZaehler[1]);
 		wslAusgabe("Two Pair", wslZaehler[2]);
@@ -126,6 +81,28 @@ public class pokerMain {
 	public static int kartensymbolik(int karte) {
 		return karte%ANZAHL_KARTEN_PRO_FARBE;
 	}
+	public static boolean checkPair(int gleiche) {
+		boolean pair=false;
+		int zaehler=0;
+		for (int i=0;i<hANZAHL;i++) {
+			for (int j=(i+1);j<hANZAHL;j++) {
+				if (kartensymbolik(hand[i])==kartensymbolik(hand[j])) {
+					zaehler++;
+					if (zaehler==gleiche) {
+						pair=true;
+					}
+					if (zaehler>gleiche) {
+						pair=false;
+					}
+				}
+			}
+			zaehler=0;
+			if (pair==true) { //damit z.B.: bei einem Full House bei der Suche nach OnePair die Funktion nicht fälschlicherwiese nur für Three of a Kind "true" zurückgibt
+				break;
+			}
+		}
+		return pair;
+	}
 	public static boolean twoPair() {
 		boolean twoPair=false;
 		int zaehler=0;
@@ -153,31 +130,6 @@ public class pokerMain {
 			twoPair=true;
 		}
 		return twoPair;
-	}
-	public static boolean checkPair(int gleiche) {
-		boolean pair=false;
-		int zaehler=0;
-		for (int i=0;i<hANZAHL;i++) {
-			for (int j=0;j<hANZAHL;j++) {
-				if (i==j) {
-					continue;
-				}
-				if (kartensymbolik(hand[i])==kartensymbolik(hand[j])) {
-					zaehler++;
-					if (zaehler==gleiche) {
-						pair=true;
-					}
-					if (zaehler>gleiche) {
-						pair=false;
-					}
-				}
-			}
-			zaehler=0;
-			if (pair==true) { //damit z.B.: bei einem Full House bei der Suche von OnePair die Funktion nicht fälschlicherwiese nur für Three of a Kind true zurückgibt
-				break;
-			}
-		}
-		return pair;
 	}
 	public static boolean flush() {
 		boolean flush=true;
