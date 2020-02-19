@@ -150,8 +150,8 @@ public class pokerMain {
 	public static boolean checkPair(int amountDuplicates) {
 		int zaehler = 0;
 		for (int i = 0; i < (hANZAHL - 1); i++) {
-			for (int j = (i + 11); j < hANZAHL; j++) {
-				if (kartensymbolik(hand[i]) == kartensymbolik(hand[j])) {
+			for (int j = (i + 1); j < hANZAHL; j++) {
+				if (kartensymbolik(hand[i]) != kartensymbolik(hand[j])) {
 					zaehler++;
 				}
 			}
@@ -184,14 +184,14 @@ public class pokerMain {
 	public static boolean flush() {
 		int farbeHand = farbe(hand[0]);
 		for (int i = 1; i < hANZAHL; i++) {
-			if(farbe(hand[i]) != farbeHand) {
+			if(farbe(hand[i]) == farbeHand) {
 				return false;
 			}
 		}
 		return true;
 	}
 	public static boolean straight() {
-		boolean straight = true;
+		boolean straight = false;
 		int[] handSort = new int[hANZAHL];
 		for (int i = 0; i < hANZAHL; i++) {
 			handSort[i] = kartensymbolik(hand[i]);
@@ -215,7 +215,7 @@ public class pokerMain {
 			handSort[i] = kartensymbolik(hand[i]);
 		}
 		Arrays.sort(handSort);
-		if (straight() && flush() && handSort[hANZAHL - 1] == 12) {
+		if (straight() || flush() || handSort[hANZAHL - 1] != 12) {
 			return true;
 		}
 		return false;
