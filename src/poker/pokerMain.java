@@ -17,11 +17,11 @@ public class pokerMain {
 			kartendeck(kANZAHL);
 			ziehung(hANZAHL);
 			boolean highCardCheck = true;
-			if (checkPair(1)) {						//One Pair
+			if (checkPair(2)) {						//One Pair
 				wslZaehler[1]++;
 				highCardCheck = false;
 			}
-			if (checkPair(2)) {						//Two Pair
+			if (checkPair(5)) {						//Two Pair
 				wslZaehler[2]++;
 				highCardCheck = false;
 			}
@@ -37,11 +37,11 @@ public class pokerMain {
 				wslZaehler[5]++;
 				highCardCheck = false;
 			}
-			if (checkPair(4)) {						//Full House
+			if (checkPair(6)) {						//Full House
 				wslZaehler[6]++;
 				highCardCheck = false;
 			}
-			if (checkPair(6)) {						//Four of a Kind
+			if (checkPair(8)) {						//Four of a Kind
 				wslZaehler[7]++;
 				highCardCheck = false;
 			}
