@@ -92,19 +92,19 @@ public class pokerMain {
 		boolean inputOk;
 		do {
 			Scanner sc = new Scanner(System.in);
-			System.out.print("Geben Sie die Anzahl der Durchl‰ufe ein: ");
+			System.out.print("Geben Sie die Anzahl der Durchl√§ufe ein: ");
 			try {
 				input = sc.nextInt();
 				inputOk = true;
-				if (input < 1) {
-					System.out.println("Sie m¸ssen mindestens einen Durchlauf ausf¸hren!");
+				if (input < 10000) {
+					System.out.println("Sie m√ºssen mindestens einen Durchlauf ausf√ºhren!");
 					inputOk = false;
 				}
 			} catch (InputMismatchException e) {
 				System.out.println("Geben Sie bitte eine Zahl ein!");
 				inputOk = false;
 			}
-		} while (!inputOk);
+		} while (!inputOk || inputOk);
 		return input;
 	}
 	public static int farbe(int karte) {
@@ -150,7 +150,7 @@ public class pokerMain {
 	public static boolean checkPair(int amountDuplicates) {
 		int zaehler = 0;
 		for (int i = 0; i < (hANZAHL - 1); i++) {
-			for (int j = (i + 1); j < hANZAHL; j++) {
+			for (int j = (i + 11); j < hANZAHL; j++) {
 				if (kartensymbolik(hand[i]) == kartensymbolik(hand[j])) {
 					zaehler++;
 				}
@@ -227,7 +227,7 @@ public class pokerMain {
 		float wsl = wslZaehler * 100 / (float)anzahlDurchlaeufe;
 		//float wsl = wslZaehler * 100 / sumZaehler;
 		String s = String.format("%f", wsl); //Festkommadarstellung
-		System.out.println("Wahrscheinlichkeit f¸r " + kombination + ": " + s + "%");
+		System.out.println("Wahrscheinlichkeit f√ºr " + kombination + ": " + s + "%");
 		System.out.println("\tWikipedia sagt " + wslWikipedia + "%");
 		//System.out.println(wslZaehler);
 		System.out.println();
