@@ -17,11 +17,11 @@ public class pokerMain {
 			kartendeck(kANZAHL);
 			ziehung(hANZAHL);
 			boolean highCardCheck = true;
-			if (checkPair(2)) {						//One Pair
+			if (checkPair(1)) {						//One Pair
 				wslZaehler[1]++;
 				highCardCheck = false;
 			}
-			if (checkPair(5)) {						//Two Pair
+			if (checkPair(2)) {						//Two Pair
 				wslZaehler[2]++;
 				highCardCheck = false;
 			}
@@ -37,11 +37,11 @@ public class pokerMain {
 				wslZaehler[5]++;
 				highCardCheck = false;
 			}
-			if (checkPair(6)) {						//Full House
+			if (checkPair(4)) {						//Full House
 				wslZaehler[6]++;
 				highCardCheck = false;
 			}
-			if (checkPair(8)) {						//Four of a Kind
+			if (checkPair(6)) {						//Four of a Kind
 				wslZaehler[7]++;
 				highCardCheck = false;
 			}
@@ -96,7 +96,7 @@ public class pokerMain {
 			try {
 				input = sc.nextInt();
 				inputOk = true;
-				if (input < 10000) {
+				if (input < 1) {
 					System.out.println("Sie müssen mindestens einen Durchlauf ausführen!");
 					inputOk = false;
 				}
@@ -104,7 +104,7 @@ public class pokerMain {
 				System.out.println("Geben Sie bitte eine Zahl ein!");
 				inputOk = false;
 			}
-		} while (!inputOk || inputOk);
+		} while (!inputOk);
 		return input;
 	}
 	public static int farbe(int karte) {
@@ -151,7 +151,7 @@ public class pokerMain {
 		int zaehler = 0;
 		for (int i = 0; i < (hANZAHL - 1); i++) {
 			for (int j = (i + 1); j < hANZAHL; j++) {
-				if (kartensymbolik(hand[i]) != kartensymbolik(hand[j])) {
+				if (kartensymbolik(hand[i]) == kartensymbolik(hand[j])) {
 					zaehler++;
 				}
 			}
@@ -184,14 +184,14 @@ public class pokerMain {
 	public static boolean flush() {
 		int farbeHand = farbe(hand[0]);
 		for (int i = 1; i < hANZAHL; i++) {
-			if(farbe(hand[i]) == farbeHand) {
+			if(farbe(hand[i]) != farbeHand) {
 				return false;
 			}
 		}
 		return true;
 	}
 	public static boolean straight() {
-		boolean straight = false;
+		boolean straight = true;
 		int[] handSort = new int[hANZAHL];
 		for (int i = 0; i < hANZAHL; i++) {
 			handSort[i] = kartensymbolik(hand[i]);
@@ -215,7 +215,7 @@ public class pokerMain {
 			handSort[i] = kartensymbolik(hand[i]);
 		}
 		Arrays.sort(handSort);
-		if (straight() || flush() || handSort[hANZAHL - 1] != 12) {
+		if (straight() && flush() && handSort[hANZAHL - 1] == 12) {
 			return true;
 		}
 		return false;
